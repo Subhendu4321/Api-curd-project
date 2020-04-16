@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import React, {useState,useEffect} from 'react';
 import fetch from 'isomorphic-unfetch';
+import {getEmployeeDetails} from "../EndPiont";
 
 
 const useStyles = makeStyles({
@@ -46,6 +47,15 @@ export default function App(props){
       
   //   fetchData();
   // });
+
+  useEffect(() =>{
+    getEmployeeDetails()
+        .then(response =>{
+          const {data} = response;
+          setEmpDetails(data);
+        })
+        .catch(console.log)
+  },[])
 
   return(
     <>
@@ -85,15 +95,15 @@ export default function App(props){
 };
 
 
-App.getInitialProps = async function() {
-  const res = await fetch(`http://dummy.restapiexample.com/api/v1/employees`);
-  const data1 = await res.json();
-
-  console.log(`Show data fetched. Count: ${data1.length}`);
-  console.log("data",data1);
-
-  return {
-    data1
-    
-  };
-};
+// App.getInitialProps = async function() {
+//   // const res = await fetch(`http://dummy.restapiexample.com/api/v1/employees`);
+//   // const data1 = await res.json();
+//
+//   console.log(`Show data fetched. Count: ${data1.length}`);
+//   console.log("data",data1);
+//
+//   return {
+//     data1
+//
+//   };
+// };
