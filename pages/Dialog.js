@@ -50,7 +50,9 @@ export default function FormDialog(props) {
       axios.post(`http://dummy.restapiexample.com/api/v1/create`,{"name":name,"salary":salary,"age":age})
       .then(res => {
           console.log(res);
-          console.log(res.data);
+          console.log(res.data.data);
+          const newEmployee = {employee_name: res.data.data.name, employee_salary: res.data.data.salary, employee_age: res.data.data.age, id: res.data.data.id}
+          
           
       })
       {handleClose}
